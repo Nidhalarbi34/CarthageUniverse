@@ -3,10 +3,11 @@ package tn.enicarthage.EnicarthageUniverse.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
 import tn.enicarthage.EnicarthageUniverse.repsitories.EtudiantRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class EtudiantServiceImpl implements EtudiantService {
     @Autowired
     EtudiantRepository etudiantRepository ;
@@ -28,7 +29,7 @@ public class EtudiantServiceImpl implements EtudiantService {
     }
 
     @Override
-    public List<Etudiant> afficheEtudiant() {
+    public List<Etudiant> afficherEtudiant() {
         return etudiantRepository.findAll();
     }
 

@@ -9,8 +9,9 @@ public interface EtudiantService {
     public Etudiant ajouterEtudiant(Etudiant admin );
     public Etudiant modifierEtudiant(Etudiant admin);
     public void   supprimerEtudiant(Long id );
-    public List<Etudiant> afficheEtudiant();
+    public List<Etudiant> afficherEtudiant();
     public Optional<Etudiant> afficherEtudiantById(Long id);
+
     //public void inscrireCours(Cours cours) ;
     public void consulterRessourcesEducatives();
     //public Map<Cours, Double> consulterNotes();

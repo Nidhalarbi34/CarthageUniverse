@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
 
 public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
+    Etudiant findEtudiantByEmail(String email);
 }

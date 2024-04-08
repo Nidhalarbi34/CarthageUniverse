@@ -25,7 +25,7 @@ public abstract class User {
     private String nom;
     private String prenom;
     private String email;
-    private String motDePasse;
+    private String mdp;
 
 
 }
