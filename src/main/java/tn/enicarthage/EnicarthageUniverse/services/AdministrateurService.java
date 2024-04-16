@@ -10,9 +10,9 @@ import java.util.Optional;
 @Service
 public class AdministrateurService {
     @Autowired
-    AdministrateurRepository administrateurRepository ;
+    AdministrateurRepository administrateurRepository;
 
-    public Administrateur ajouterEtudiant(Administrateur admin ) {
+    public Administrateur ajouterAdministrateur(Administrateur admin) {
         return administrateurRepository.save(admin);
     }
 
@@ -20,7 +20,7 @@ public class AdministrateurService {
         return administrateurRepository.save(admin);
     }
 
-    public void  supprimerAdministrateur(Long id) {
+    public void supprimerAdministrateur(Long id) {
         administrateurRepository.deleteById(id);
 
     }
@@ -32,4 +32,4 @@ public class AdministrateurService {
     public Optional<Administrateur> afficherAdministrateurById(Long id) {
         return administrateurRepository.findById(id);
     }
-
+}

@@ -92,7 +92,7 @@ public class AdministrateurController {
     }
     @PostMapping(path = "register")
     public ResponseEntity<Administrateur> addAdministrateur(@RequestBody Administrateur administrateur) {
-        etudiant.setMdp(this.bCryptPasswordEncoder.encode(administrateur.getMdp()));
+        administrateur.setMdp(this.bCryptPasswordEncoder.encode(administrateur.getMdp()));
         Administrateur savedUser = administrateurRepository.save(administrateur);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }

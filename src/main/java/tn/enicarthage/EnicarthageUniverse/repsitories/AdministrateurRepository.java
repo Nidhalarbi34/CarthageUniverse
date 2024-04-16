@@ -7,5 +7,5 @@ import tn.enicarthage.EnicarthageUniverse.entities.Administrateur;
 @Repository
 
 public interface AdministrateurRepository extends JpaRepository<Administrateur, Long> {
-
+    Administrateur findAdministrateurByEmail(String email);
 }
