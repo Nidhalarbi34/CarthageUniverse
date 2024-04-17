@@ -1,4 +1,4 @@
-package tn.enicarthage.EnicarthageUniverse.controllers;
+package tn.enicarthage.EnicarthageUniverse.conrtollers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

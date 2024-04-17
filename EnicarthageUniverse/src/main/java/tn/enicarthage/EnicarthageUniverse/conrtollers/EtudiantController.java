@@ -63,7 +63,6 @@ public class EtudiantController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginEtudiant(@RequestBody Etudiant etudiant) {
         System.out.println("in login-etudiant"+etudiant);
-
         HashMap<String, Object> response = new HashMap<>();
 
         Etudiant userFromDB = etudiantRepository.findEtudiantByEmail(etudiant.getEmail());

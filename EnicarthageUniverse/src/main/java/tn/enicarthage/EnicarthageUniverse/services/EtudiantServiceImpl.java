@@ -68,4 +68,5 @@ public class EtudiantServiceImpl implements EtudiantService {
     public void consulterStatistiquesPersonnelles() {
 
     }
+
 }
