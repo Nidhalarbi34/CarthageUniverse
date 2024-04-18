@@ -1,11 +1,14 @@
 package tn.enicarthage.EnicarthageUniverse.services;
 
-import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
+import tn.enicarthage.EnicarthageUniverse.entities.Cours;
 
-public class CoursService {
-    //public void ajouterCours(Long idEtudiant , Long idCours);
-//    public void suppEtudiantcours(Long idEtudiant , Long idCours);
+import java.util.List;
 
-
-
+public interface CoursService {
+    public List<Cours> getAllCourses();
+   public  Cours getCourseById(Long id);
+  public  Cours createCourse(Cours cours);
+   public Cours updateCourse(Long id, Cours cours);
+  public  void deleteCourse(Long id);
 }
+

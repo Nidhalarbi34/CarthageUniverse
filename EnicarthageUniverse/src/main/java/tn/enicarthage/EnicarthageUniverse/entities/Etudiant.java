@@ -23,6 +23,7 @@ public class Etudiant extends User {
 
    //@ManyToMany
     //private List<Cours> coursInscrits;
+
    // private Map<Cours, Double> notes;
    @Temporal(TemporalType.DATE)
     private Date dateCreationCompte;
