@@ -5,11 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.enicarthage.EnicarthageUniverse.entities.Administrateur;
+import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
 import tn.enicarthage.EnicarthageUniverse.repsitories.AdministrateurRepository;
+import tn.enicarthage.EnicarthageUniverse.repsitories.EtudiantRepository;
 import tn.enicarthage.EnicarthageUniverse.services.AdministrateurService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import tn.enicarthage.EnicarthageUniverse.services.EmailSenderService;
+import tn.enicarthage.EnicarthageUniverse.services.EtudiantServiceImpl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -96,4 +100,10 @@ public class AdministrateurController {
         Administrateur savedUser = administrateurRepository.save(administrateur);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
+
+
+
+
+
+
 }
