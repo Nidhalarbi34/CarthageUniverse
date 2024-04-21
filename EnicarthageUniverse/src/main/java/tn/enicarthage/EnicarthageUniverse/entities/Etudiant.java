@@ -24,8 +24,10 @@ public class Etudiant extends User {
    //@ManyToMany
     //private List<Cours> coursInscrits;
 
-   // private Map<Cours, Double> notes;
-   @Temporal(TemporalType.DATE)
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notes> subjectScores;
+
+    @Temporal(TemporalType.DATE)
     private Date dateCreationCompte;
 
     private String informationsContact;

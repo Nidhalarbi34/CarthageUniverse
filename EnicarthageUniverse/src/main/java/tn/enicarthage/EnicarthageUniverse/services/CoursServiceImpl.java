@@ -47,4 +47,8 @@ public class CoursServiceImpl implements CoursService {
     public void deleteCourse(Long id) {
         coursRepository.deleteById(id);
     }
+    public  List<Cours> getCourseByTitre(String titre){
+        return coursRepository.findByTitreContainingIgnoreCase(titre);
+    }
+
 }

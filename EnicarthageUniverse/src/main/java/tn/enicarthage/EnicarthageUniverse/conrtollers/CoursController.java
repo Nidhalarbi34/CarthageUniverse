@@ -4,26 +4,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tn.enicarthage.EnicarthageUniverse.entities.Cours;
+import tn.enicarthage.EnicarthageUniverse.repsitories.CoursRepository;
 import tn.enicarthage.EnicarthageUniverse.services.CoursService;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/courses")
 public class CoursController {
+    @Autowired
+     CoursService coursService;
+    @Autowired
+    private CoursRepository coursRepository;
 
-    private final CoursService coursService;
 
     @Autowired
-    public CoursController(CoursService coursService) {
+    public CoursController(CoursService coursService, CoursRepository coursRepository) {
         this.coursService = coursService;
+        this.coursRepository = coursRepository;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Cours>> getAllCourses() {
-        List<Cours> courses = coursService.getAllCourses();
-        return new ResponseEntity<>(courses, HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.GET )
+//RequestBody:tekhdh vrb tabaathhom lel contrl kn sar c bon snn erreur
+    public List<Cours> getAllCourses(){
+        return coursService.getAllCourses();
+
     }
 
     @GetMapping("/{id}")
@@ -36,12 +44,10 @@ public class CoursController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Cours> createCourse(@RequestBody Cours cours) {
-        Cours createdCourse = coursService.createCourse(cours);
-        return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
+    @GetMapping("/search")
+    public List<Cours> getCourseByTitre(@RequestParam String titre) {
+        return coursService.getCourseByTitre(titre);
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<Cours> updateCourse(@PathVariable Long id, @RequestBody Cours cours) {
         Cours updatedCourse = coursService.updateCourse(id, cours);
@@ -51,10 +57,22 @@ public class CoursController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         coursService.deleteCourse(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> createCourse(@RequestBody Cours cours) {
+        try {
+            Cours savedCourse = coursRepository.save(cours);
+            return ResponseEntity.ok(savedCourse);
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging purposes
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create course");
+        }
+    }
+
+
+
 }

@@ -37,4 +37,8 @@ public class Notification {
     public Notification() {
 
     }
+    public Notification(String contenu){
+
+        this.contenu = contenu;
+    }
 }

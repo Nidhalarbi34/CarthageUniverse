@@ -4,7 +4,9 @@ package tn.enicarthage.EnicarthageUniverse.services;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
 import tn.enicarthage.EnicarthageUniverse.entities.Notification;
+import tn.enicarthage.EnicarthageUniverse.repsitories.EtudiantRepository;
 import tn.enicarthage.EnicarthageUniverse.repsitories.NotificationRepository;
 
 import java.time.LocalDateTime;
@@ -16,6 +18,8 @@ public class NotificationService {
 
     @Autowired
     private NotificationRepository notificationRepository;
+    @Autowired
+    private EtudiantRepository etudiantRepository;
 
     // Créer une nouvelle notification
     public Notification creerNotification(Notification notification) {
@@ -54,5 +58,15 @@ public class NotificationService {
 
     public void supprimerNotification(Long notificationId) {
         notificationRepository.deleteById(notificationId);
+    }
+    public void sendNotificationToLevel(String message, int niveau) {
+        EmailSenderService emailService = null;
+        List<Etudiant> etudiants = etudiantRepository.findEtudiantByAnneeEtudes(niveau);
+        Notification notification = new Notification(message);
+        notificationRepository.save(notification);
+
+        for (Etudiant etudiant : etudiants) {
+            emailService.sendSimpleEmail(etudiant.getEmail(), "Notification pour " + niveau, message);
+        }
     }
 }

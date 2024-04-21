@@ -23,11 +23,11 @@ public class Cours {
 
     private String titre;
     private String description;
-    private Date dateCreation;
+    private int anneeEtd;
+    private String specialite ;
+    @Lob
+    private String img;
 
-    @ManyToOne
-    @JoinColumn(name = "admin_id")
-    private Administrateur administrateur;
 
     //@OneToMany(mappedBy = "cours", cascade = CascadeType.ALL)
     //private List<Commentaire> commentaires = new ArrayList<>();

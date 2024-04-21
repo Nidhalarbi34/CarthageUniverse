@@ -12,4 +12,5 @@ import java.util.List;
 public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     Etudiant findEtudiantByEmail(String email);
     List<Etudiant> findEtudiantBySpecialisationAndAnneeEtudes(String specialisation , int anneeEtudes);
+    List<Etudiant> findEtudiantByAnneeEtudes(int AnneeEtudes);
 }

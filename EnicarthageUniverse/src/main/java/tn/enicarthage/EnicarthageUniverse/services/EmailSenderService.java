@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.util.List;
 
 @Service
 public class EmailSenderService {
@@ -30,6 +31,13 @@ public class EmailSenderService {
 
 
     }
+    public void sendEmailToStudents(List<String> emailAddresses, String subject, String content) {
+
+        for (String email : emailAddresses) {
+            sendSimpleEmail(email,subject,content);
+        }
+    }
+
 
 }
 
