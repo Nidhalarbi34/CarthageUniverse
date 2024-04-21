@@ -73,4 +73,8 @@ public class NotificationController {
         notificationService.supprimerNotification(notificationId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @PostMapping("/send-to-level")
+    public void sendNotificationToLevel(@RequestParam int niveau, @RequestBody String message) {
+        notificationService.sendNotificationToLevel(message, niveau);
+    }
 }
