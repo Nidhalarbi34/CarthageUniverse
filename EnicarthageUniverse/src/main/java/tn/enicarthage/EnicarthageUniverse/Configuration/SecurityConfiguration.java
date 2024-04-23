@@ -31,6 +31,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/evenements/**").permitAll()
                         .requestMatchers("/admin/login").permitAll()
                         .requestMatchers("/contact/**").permitAll()
+                        .requestMatchers("/courses/**").permitAll()
+                        .requestMatchers("/notes/**").permitAll()
                         .anyRequest().authenticated() //
                 )
                 .addFilterBefore(new JWTAuthorizationFilter(userDetailService), UsernamePasswordAuthenticationFilter.class)
