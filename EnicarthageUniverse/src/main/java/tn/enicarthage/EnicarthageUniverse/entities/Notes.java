@@ -15,19 +15,14 @@ public class Notes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "matiere_id")
     private Matieres matiere;
 
     private Float score;
 
-    public Matieres getMatieres() {
-        return  matiere;
-    }
-
-
     @ManyToOne
-    @JoinColumn(name = "etudiant_id")
+    @JoinColumn(name = "etudiant_id")  // Specifies the column in 'Notes' table that joins to the 'Etudiant' table
     private Etudiant etudiant;
 
-    // Getters and setters
 }

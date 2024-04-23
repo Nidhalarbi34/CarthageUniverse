@@ -17,5 +17,6 @@ public interface EtudiantService {
     //public Map<Cours, Double> consulterNotes();
     public void consulterNotifications();
     public void consulterStatistiquesPersonnelles();
+    public Object login(Etudiant etudiant);
 
 }

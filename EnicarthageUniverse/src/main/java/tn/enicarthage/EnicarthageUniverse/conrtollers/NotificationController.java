@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/notifications")
+@RequestMapping("/notifications")
 public class NotificationController {
 
     @Autowired
@@ -56,17 +56,6 @@ public class NotificationController {
         List<Notification> notifications = notificationService.obtenirNotificationsAdminParDate(dateCreation, adminId);
         return new ResponseEntity<>(notifications, HttpStatus.OK);
     }
-
-    @PatchMapping("/{notificationId}/lue")
-    public ResponseEntity<Notification> marquerNotificationLue(@PathVariable Long notificationId) {
-        Notification notification = notificationService.marquerNotificationLue(notificationId);
-        if (notification != null) {
-            return new ResponseEntity<>(notification, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
 
     @DeleteMapping("/{notificationId}")
     public ResponseEntity<Void> supprimerNotification(@PathVariable Long notificationId) {

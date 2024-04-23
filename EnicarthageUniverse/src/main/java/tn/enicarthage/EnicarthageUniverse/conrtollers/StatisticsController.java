@@ -3,19 +3,19 @@ package tn.enicarthage.EnicarthageUniverse.conrtollers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
+
+
 import tn.enicarthage.EnicarthageUniverse.entities.Matieres;
 import tn.enicarthage.EnicarthageUniverse.services.StatisticsService;
 
 import java.util.List;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/statistics")
+
+@ RestController
+@RequestMapping("/api/statistics")
 public class StatisticsController {
     private final StatisticsService statisticsService;
 
@@ -24,38 +24,24 @@ public class StatisticsController {
         this.statisticsService = statisticsService;
     }
 
-    @GetMapping("/all-notes")
-    public ResponseEntity<Map<Matieres, Float>> getAllNotes() {
-        // Retrieve all students
-        List<Etudiant> students = statisticsService.getAllStudents();
-
-        // Calculate and return all subject scores
-        Map<Matieres, Float> allNotes = statisticsService.calculateAllNotes();
-        return ResponseEntity.ok(allNotes);
+    @GetMapping("/all-notes/{studentId}")
+    public ResponseEntity<Map<Matieres, Float>> getAllNotes(@PathVariable Long studentId) {
+        Map<Matieres, Float> notes = statisticsService.getAllNotes(new Etudiant(studentId));
+        return ResponseEntity.ok(notes);
     }
 
     @GetMapping("/average-scores")
     public ResponseEntity<Map<Matieres, Float>> getAverageScores() {
-        // Retrieve all students
         List<Etudiant> students = statisticsService.getAllStudents();
-
-        // Calculate and return average scores
         Map<Matieres, Float> averageScores = statisticsService.calculateAverageScores(students);
         return ResponseEntity.ok(averageScores);
     }
 
-
-
-    @GetMapping("/topTotalScores")
-    public List<Etudiant> getTopStudentsByTotalScore(@RequestParam int n) {
+    @GetMapping("/top-students/total")
+    public ResponseEntity<List<Etudiant>> getTopStudentsByTotalScore(@RequestParam(required = false, defaultValue = "3") int n) {
         List<Etudiant> students = statisticsService.getAllStudents();
-        return statisticsService.findTopStudentsByTotalScore(students, n);
-    }
-
-    @GetMapping("/topAverageScores")
-    public List<Etudiant> getTopStudentsByAverageScore(@RequestParam int n) {
-        List<Etudiant> students = statisticsService.getAllStudents();
-        return statisticsService.findTopStudentsByAverageScore(students, n);
+        List<Etudiant> topStudents = statisticsService.findTopStudentsByTotalScore(students, n);
+        return ResponseEntity.ok(topStudents);
     }
 
 

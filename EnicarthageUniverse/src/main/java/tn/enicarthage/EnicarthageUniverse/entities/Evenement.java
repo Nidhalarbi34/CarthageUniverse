@@ -1,11 +1,9 @@
 package tn.enicarthage.EnicarthageUniverse.entities;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +21,9 @@ public class Evenement {
 
     private String titre;
     private String description;
-    private LocalDateTime date;
-
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    @Lob
+    private String img;
 
 }

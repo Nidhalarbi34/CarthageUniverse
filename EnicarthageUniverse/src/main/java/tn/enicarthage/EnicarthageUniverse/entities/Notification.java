@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Date;
+
 
 import java.time.LocalDateTime;
 
@@ -20,10 +22,8 @@ public class Notification {
 
     private String titre;
     private String contenu;
-    private LocalDateTime dateCreation;
-
-    private boolean lue;
-
+    @Temporal(TemporalType.DATE)
+    private Date dateCreation;
 
     @ManyToOne
     @JoinColumn(name = "etudiant_id")

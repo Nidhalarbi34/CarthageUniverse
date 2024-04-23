@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import tn.enicarthage.EnicarthageUniverse.entities.Cours;
 import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
 import tn.enicarthage.EnicarthageUniverse.entities.Evenement;
 import tn.enicarthage.EnicarthageUniverse.entities.InscriptionEvenement;
@@ -14,7 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/evenements")
+@CrossOrigin("*")
+@RequestMapping("/evenements")
 @RequiredArgsConstructor
 public class EvenementController {
 
@@ -60,4 +62,10 @@ public class EvenementController {
     @GetMapping
     public List<Evenement> afficherTousLesEvenements() {
         return evenementService.afficherTousLesEvenements();
-    }}
+    }
+    @GetMapping("/search")
+    public List<Evenement> getEvenementByTitre(@RequestParam String titre) {
+
+        return evenementService.getEvenementByTitre(titre);
+    }
+}

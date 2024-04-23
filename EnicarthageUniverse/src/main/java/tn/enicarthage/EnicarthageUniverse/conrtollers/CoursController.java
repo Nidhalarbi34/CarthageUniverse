@@ -46,6 +46,7 @@ public class CoursController {
 
     @GetMapping("/search")
     public List<Cours> getCourseByTitre(@RequestParam String titre) {
+
         return coursService.getCourseByTitre(titre);
     }
     @PutMapping("/{id}")

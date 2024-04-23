@@ -31,5 +31,9 @@ public class Etudiant extends User {
     private Date dateCreationCompte;
 
     private String informationsContact;
+    public Etudiant(Long studentId) {
+        this.matricule=studentId.toString();
+    }
+
 
 }

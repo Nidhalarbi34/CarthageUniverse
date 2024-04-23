@@ -10,12 +10,14 @@ import tn.enicarthage.EnicarthageUniverse.services.AdministrateurService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
+
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@Slf4j
 @RestController
 @CrossOrigin("*")
 @RequestMapping(value ="/admin")
@@ -37,27 +39,52 @@ public class AdministrateurController {
 
     @RequestMapping(method =  RequestMethod.POST )
 
-    public Administrateur ajoutAdministrateur(@RequestBody Administrateur administrateur){
-        administrateur.setMdp(this.bCryptPasswordEncoder.encode(administrateur.getMdp()));
-        Administrateur  savedUser = administrateurRepository.save(administrateur);
-        return administrateurService.ajouterAdministrateur(administrateur);
-
+    public ResponseEntity<Object> ajoutAdministrateur(@RequestBody Administrateur administrateur) {
+        try {
+            administrateur.setMdp(this.bCryptPasswordEncoder.encode(administrateur.getMdp()));
+            Administrateur savedAdministrateur = administrateurRepository.save(administrateur);
+            administrateurService.ajouterAdministrateur(administrateur);
+            log.info("Administrateur créé avec succès : {}", savedAdministrateur.getEmail());
+            return ResponseEntity.ok(savedAdministrateur);
+        } catch (Exception e) {
+            log.error("Erreur lors de la création de l'administrateur : {}", administrateur.getEmail(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Échec de la création de l'administrateur");
+        }
     }
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE )
-    public void suppAdministrateur(@PathVariable("id") long id){
-        administrateurService.supprimerAdministrateur(id);
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE )
+    public ResponseEntity<Object> suppAdministrateur(@PathVariable("id") long id) {
+        try {
+            administrateurService.supprimerAdministrateur(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            log.error("Erreur lors de la suppression de l'administrateur avec l'ID : {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Échec de la suppression de l'administrateur");
+        }
     }
     @RequestMapping(method = RequestMethod.GET )
-    public List<Administrateur> afficherAdministrateur(){
-        return administrateurService.afficherAdministrateur();
-
+    public ResponseEntity<Object> afficherAdministrateur() {
+        try {
+            List<Administrateur> administrateurs = administrateurService.afficherAdministrateur();
+            return ResponseEntity.ok(administrateurs);
+        } catch (Exception e) {
+            log.error("Erreur lors de l'affichage des administrateurs", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Échec de l'affichage des administrateurs");
+        }
     }
     @RequestMapping(value = "/{id}" , method = RequestMethod.GET)
-    public Optional<Administrateur> getAdministrateurById(@PathVariable("id") long id){
-
-        Optional<Administrateur> administrateur = administrateurService.afficherAdministrateurById(id);
-        return administrateur;
+    public ResponseEntity<Object> getAdministrateurById(@PathVariable("id") long id) {
+        try {
+            Optional<Administrateur> administrateur = administrateurService.afficherAdministrateurById(id);
+            if (administrateur.isPresent()) {
+                return ResponseEntity.ok(administrateur.get());
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            log.error("Erreur lors de la récupération de l'administrateur avec l'ID : {}", id, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Échec de la récupération de l'administrateur");
+        }
     }
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginAdministrateur(@RequestBody Administrateur administrateur) {

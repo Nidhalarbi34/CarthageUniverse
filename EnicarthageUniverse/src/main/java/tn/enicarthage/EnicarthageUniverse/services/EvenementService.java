@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.enicarthage.EnicarthageUniverse.entities.Cours;
 import tn.enicarthage.EnicarthageUniverse.entities.Evenement;
 import tn.enicarthage.EnicarthageUniverse.repsitories.EvenementRepository;
 
@@ -48,5 +49,9 @@ public class EvenementService {
     public List<Evenement> afficherTousLesEvenements() {
         return evenementRepository.findAllByOrderByDateAsc();
     }
+    public  List<Evenement> getEvenementByTitre(String titre){
+        return evenementRepository.findByTitreContainingIgnoreCase(titre);
+    }
+
 
 }

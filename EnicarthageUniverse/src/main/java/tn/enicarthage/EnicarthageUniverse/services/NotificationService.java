@@ -27,14 +27,7 @@ public class NotificationService {
     }
 
     // Marquer une notification comme lue
-    public Notification marquerNotificationLue(Long notificationId) {
-        Notification notification = notificationRepository.findById(notificationId).orElse(null);
-        if (notification != null) {
-            notification.setLue(true);
-            return notificationRepository.save(notification);
-        }
-        return null;
-    }
+
 
     public List<Notification> obtenirNotificationsEtudiantParDate(Long etudiantId) {
         return notificationRepository.findByEtudiantIdOrderByDateCreationAsc(etudiantId);
