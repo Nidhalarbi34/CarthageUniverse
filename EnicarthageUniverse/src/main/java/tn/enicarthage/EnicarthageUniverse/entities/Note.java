@@ -15,7 +15,6 @@ public class Note {
     @JoinColumn(name = "etudiant_id")
     private Etudiant etudiant;
 
-    @Enumerated(EnumType.STRING)
     private String matiere;
 
     private Float value;

@@ -8,7 +8,6 @@ import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
 import java.util.List;
 
 @Repository
-
 public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     Etudiant findEtudiantByEmail(String email);
     List<Etudiant> findEtudiantBySpecialisationAndAnneeEtudes(String specialisation , int anneeEtudes);

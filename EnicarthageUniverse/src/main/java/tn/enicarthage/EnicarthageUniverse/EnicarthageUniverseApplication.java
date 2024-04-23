@@ -4,14 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.EventListener;
+import tn.enicarthage.EnicarthageUniverse.entities.Etudiant;
+import tn.enicarthage.EnicarthageUniverse.repsitories.EtudiantRepository;
 import tn.enicarthage.EnicarthageUniverse.services.EmailSenderService;
 
 import javax.mail.MessagingException;
+import java.util.Date;
 
 @SpringBootApplication
 public class EnicarthageUniverseApplication {
-	@Autowired
+
+
+
+	public static void main(String[] args) {
+	/*@Autowired
 	private EmailSenderService senderService;
 	public static void main(String[] args) {
 		SpringApplication.run(EnicarthageUniverseApplication.class, args);
@@ -22,5 +30,5 @@ public class EnicarthageUniverseApplication {
 				"This is email subject",
 				"This is email body");
 
-	}
-}
+	}*/
+}}
