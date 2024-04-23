@@ -19,6 +19,11 @@ public class EnicarthageUniverseApplication {
 
 
 	public static void main(String[] args) {
+		ConfigurableApplicationContext context = SpringApplication.run(EnicarthageUniverseApplication.class, args);
+		EtudiantRepository etudiantRepository = context.getBean(EtudiantRepository.class);
+
+
+	}
 	/*@Autowired
 	private EmailSenderService senderService;
 	public static void main(String[] args) {
@@ -31,4 +36,4 @@ public class EnicarthageUniverseApplication {
 				"This is email body");
 
 	}*/
-}}
+}

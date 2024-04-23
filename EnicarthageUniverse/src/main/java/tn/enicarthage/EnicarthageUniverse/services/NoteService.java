@@ -118,6 +118,23 @@ public class NoteService {
     }
 
 
+    public int getTotalNumberOfMatieres() {
+        // Get all notes from the repository
+        List<Note> allNotes = noteRepository.findAll();
+
+        // Use a set to store unique matieres
+        Set<String> uniqueMatieres = new HashSet<>();
+
+        // Count unique matieres
+        for (Note note : allNotes) {
+            uniqueMatieres.add(note.getMatiere());
+        }
+
+        // Return the total count of unique matieres
+        return uniqueMatieres.size();
+    }
+
+
 
 
 }

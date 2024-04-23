@@ -67,4 +67,8 @@ public class NotesController {
         return new ResponseEntity<>("Note added successfully for student with ID 1", HttpStatus.CREATED);
     }
 
+    @GetMapping("/totalNumberOfMatieres")
+    public int getTotalNumberOfMatieres() {
+        return noteService.getTotalNumberOfMatieres();}
+
 }
