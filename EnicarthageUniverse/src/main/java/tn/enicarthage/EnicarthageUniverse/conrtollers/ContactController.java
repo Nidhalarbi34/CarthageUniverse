@@ -29,15 +29,15 @@ public class ContactController {
 
     }
 
-    @RequestMapping(method =  RequestMethod.POST )
+    @RequestMapping(method =  RequestMethod.POST)
     public ResponseEntity<Object> ajoutContact(@RequestBody Contact contact) {
         try {
             Contact savedContact = contactRepositery.save(contact);
             contactService.ajouterContact(contact);
-            log.info("Contact ajouté avec succès : {}", savedContact.getId());
+            log.info("Contact ajouté avec succès : {}",savedContact.getId());
             return ResponseEntity.ok(savedContact);
         } catch (Exception e) {
-            log.error("Erreur lors de l'ajout du contact", e);
+            log.error("Erreur lors de l'ajout du contact",e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Échec de l'ajout du contact");
         }
     }

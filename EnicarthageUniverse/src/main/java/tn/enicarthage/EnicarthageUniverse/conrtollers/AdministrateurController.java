@@ -110,7 +110,7 @@ public class AdministrateurController {
                         .signWith(SignatureAlgorithm.HS256, "SECRET")
                         .compact();
                 response.put("token", token);
-                System.out.println("hhh");
+                System.out.println("ok");
                 return ResponseEntity.status(HttpStatus.OK).body(response);
             }
 

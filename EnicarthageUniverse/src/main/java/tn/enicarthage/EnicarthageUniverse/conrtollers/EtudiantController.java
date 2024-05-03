@@ -9,6 +9,8 @@ import tn.enicarthage.EnicarthageUniverse.repsitories.EtudiantRepository;
 import tn.enicarthage.EnicarthageUniverse.services.EtudiantService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
+import jakarta.validation.Valid;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -36,7 +38,7 @@ public class EtudiantController {
 
     }
     @RequestMapping(method =  RequestMethod.POST )
-    public ResponseEntity<Object> ajouterEtudiant(@RequestBody Etudiant etudiant) {
+    public ResponseEntity<Object> ajouterEtudiant(@RequestBody @Valid Etudiant etudiant) {
         try {
             etudiant.setMdp(this.bCryptPasswordEncoder.encode(etudiant.getMdp()));
             Etudiant savedEtudiant = etudiantRepository.save(etudiant);
@@ -44,7 +46,7 @@ public class EtudiantController {
             log.info("Étudiant créé avec succès : {}", savedEtudiant.getEmail());
             return ResponseEntity.ok(savedEtudiant);
         } catch (Exception e) {
-            log.error("Erreur lors de la création de l'étudiant : {}", etudiant.getEmail(), e);
+            log.error("Erreur lors de la création de l'étudiant : ", etudiant.getEmail(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Échec de la création de l'étudiant");
         }
     }
@@ -78,7 +80,7 @@ public class EtudiantController {
                 return ResponseEntity.notFound().build();
             }
         } catch (Exception e) {
-            log.error("Erreur lors de la récupération de l'étudiant avec l'ID : {}", id, e);
+            log.error("Erreur lors de la récupération de l'étudiant avec l'ID :", id, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Échec de la récupération de l'étudiant");
         }
     }
@@ -96,7 +98,7 @@ public class EtudiantController {
         }
     }
     @PostMapping(path = "register")
-    public ResponseEntity<Etudiant> addEtudiant(@RequestBody Etudiant etudiant) {
+    public ResponseEntity<Etudiant> addEtudiant(@RequestBody  @Valid Etudiant etudiant) {
         etudiant.setMdp(this.bCryptPasswordEncoder.encode(etudiant.getMdp()));
         Etudiant savedUser = etudiantRepository.save(etudiant);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);

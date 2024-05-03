@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.filter.OncePerRequestFilter;
-
 import java.io.IOException;
 
 class JWTAuthorizationFilter extends OncePerRequestFilter {
@@ -36,7 +35,6 @@ class JWTAuthorizationFilter extends OncePerRequestFilter {
         String token = authorizationHeader.substring(7); // Extract JWT token from the header
 
         try {
-            // Validate the token
             String email = JWTUtils.extractEmail(token);
 
 

@@ -23,8 +23,8 @@ public class UserService implements UserDetailsService {
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())
-                .password(user.getMdp()) // You might want to hash the password before returning
-                .authorities("ROLE_USER") // You can assign roles or authorities here
+                .password(user.getMdp())
+                .authorities("role")
                 .build();
     }
 }
